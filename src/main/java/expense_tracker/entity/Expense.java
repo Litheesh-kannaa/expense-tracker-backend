@@ -2,7 +2,6 @@ package expense_tracker.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Entity
@@ -14,11 +13,8 @@ public class Expense {
     private Long id;
 
     private String title;
-
     private Double amount;
-
     private LocalDate expenseDate;
-
     private String description;
 
     @ManyToOne

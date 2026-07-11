@@ -1,5 +1,6 @@
 package expense_tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,9 +15,14 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true) // If null, it means it's a global category
+    private User user;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Expense> expenses = new ArrayList<>();
 }

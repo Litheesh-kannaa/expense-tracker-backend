@@ -1,5 +1,6 @@
 package expense_tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,8 +22,7 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Expense> expenses = new ArrayList<>();
 }
